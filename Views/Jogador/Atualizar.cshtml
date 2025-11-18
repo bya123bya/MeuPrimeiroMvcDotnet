@@ -1,0 +1,32 @@
+@page
+
+<div>
+    <h1>Tela de Atualizar Jogador</h1>
+
+    @*Formulário de cadastro de jogador*@
+    <form method="PUT" asp-action="AtualizarJogador" asp-controller="Jogador">
+        <input type="hidden" name="Id" value="@ViewBag.Jogador.Id">
+        <div class="form-control">
+            <label for="nome">Nome do Jogador</label>
+            <input type="text" name="Nome" value="@ViewBag.Jogador.Nome">
+        </div>
+        <div class="form-control">
+            <label for="Email">Email do Jogador</label>
+            <input type="text" name="Email"value="@ViewBag.Jogador.Email">
+        </div>
+        <div class="form-control">
+            <label for="Senha">Senha do Jogador</label>
+            <input type="Password" name="Senha"value="@ViewBag.Jogador.Senha">
+        </div>
+        <div class="form-control">
+            <label for="Id">Id da Equipe do Jogador</label>
+            <select class="form-select" name="IdEquipe">
+            <option>Selecione uma equipe</option>
+             @foreach(Equipe equipe in ViewBag.ListaEquipes)
+                    {
+                        <option value="@equipe.Id">@equipe.Nome</option>
+                    }
+        </div>
+        <button class="btn btn-primary" type="submit">Atualizar</button>
+    </form>
+</div>

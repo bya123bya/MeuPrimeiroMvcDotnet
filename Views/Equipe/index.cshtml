@@ -1,0 +1,42 @@
+@page
+
+<div>
+    <h1>Tela de Equipe</h1>
+    @*Formulário de cadastro de equipe*@
+    <form method="POST" asp-action="CadastrarEquipe" asp-controller="Equipe" enctype="multipart/form-data"> 
+        <div class="form-control">
+            <label for="nome">Nome da equipe</label>
+            <input type="text" name="Nome">
+        </div>
+        <div class="form-control">
+            <label for="imagem">Imagem da equipe</label>
+            <input type="file" name="Imagem">
+        </div>
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Imagem</th>
+            <th>Ações</th>
+            <th>Atualizar/Excluir</th>
+        </thead>
+        <tbody>
+            @foreach(Equipe equipe in ViewBag.ListaEquipes)// isso é uma lânbida, especificar qual quer retornar
+            {
+                <tr>
+                    <td>@equipe.Id</td>
+                    <td>@equipe.Nome</td>
+                    <td>@equipe.Imagem</td>
+                    <td>@equipe.Nome</td>
+                    <td>
+                    <a class="btn btn-primary" href="/Equipe/Atualizar/@equipe.Id">Atualizar</a>
+                    @* Passando para a função de excluir a referência do id da equipe *@
+                    <a class="btn btn-danger" asp-action="ExcluirEquipe" asp-controller="Equipe" asp-route-id="@equipe.Id">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

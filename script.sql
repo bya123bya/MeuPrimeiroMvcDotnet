@@ -1,0 +1,22 @@
+CREATE DATABASE projetoTeste;
+GO
+
+USE projetoTeste;
+GO
+
+CREATE TABLE Equipe(
+	Id INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(120),
+	Imagem VARCHAR(255)
+);
+
+GO
+CREATE TABLE Jogador(
+	Id INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(120),
+	Email VARCHAR(120),
+	Senha VARCHAR(120),
+	
+	IdEquipe INT,
+	FOREIGN KEY (IdEquipe) REFERENCES Equipe(id)
+);

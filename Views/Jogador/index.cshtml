@@ -1,0 +1,57 @@
+@page
+
+<div>
+    <h1>Tela de jogador</h1>
+    @*Formulário de cadastro de jogador*@
+    <form method="POST" asp-action="CadastrarJogador" asp-controller="Jogador">
+        <div class="form-control">
+            <label for="nome">Nome do jogador</label>
+            <input type="text" name="Nome">
+        </div>
+        <div class="form-control">
+            <label for="Email">Email do jogador</label>
+            <input type="text" name="Email">
+        </div>
+        <div class="form-control">
+            <label for="Senha">Senha do jogador</label>
+            <input type="Password" name="Senha">
+        </div>
+        <div class="form-control">
+            <select class="form-select" name="IdEquipe">
+            <option>Selecione uma equipe</option>
+                    @foreach(Equipe equipe in ViewBag.ListaEquipes)
+                    {
+                        <option value="@equipe.Id">@equipe.Nome</option>
+                    }
+            </select>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Senha</th>
+            <th>Atualizar/Excluir</th>
+        </thead>
+        <tbody>
+            @foreach(Jogador jogador in ViewBag.ListaJogador)
+            {
+                <tr>
+                    <td>@jogador.Id</td>
+                    <td>@jogador.Nome</td>
+                    <td>@jogador.Email</td>
+                    @* Forma de eu conseguir acessar os dados da equipe relacionada com jogador *@
+                    <td>@jogador.IdEquipeNavigation?.Nome</td>
+                    <td>
+                    <a class="btn btn-primary" href="/Jogador/Atualizar/@jogador.Id">Atualizar</a>
+                    @* Passando para a função de excluir a referência do id da equipe *@
+                    <a class="btn btn-danger" asp-action="ExcluirJogador" asp-controller="Jogador" asp-route-id="@jogador.Id">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
